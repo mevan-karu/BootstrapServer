@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bootstrapserver.Message;
+package com.bootstrapserver.message;
 
 /**
  *
@@ -70,7 +70,7 @@ public abstract class Message {
         this.senderPort = senderPort;
     }
     
-    public String MessageToString(){
+    public String messageToString(){
         return title+","+recieverAddress+","+Integer.toString(recieverPort)+","+senderAddress+","+Integer.toString(senderPort)+","+timestamp;    
     }
             

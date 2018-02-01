@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bootstrapserver.Message;
+package com.bootstrapserver.message;
 
 /**
  *
@@ -35,8 +35,8 @@ public class LoginMessage extends Message{
     }
 
     @Override
-    public String MessageToString() {
-        return super.MessageToString()+","+username+","+password+"\n";        
+    public String messageToString() {
+        return super.messageToString()+","+username+","+password+"\n";
     }
     
 }

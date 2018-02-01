@@ -5,23 +5,44 @@
  */
 package com.bootstrapserver.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Mevan
  */
 public class DBConnection {
-    private String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    private String url = "jdbc:derby:bootstrapserver;create=true";
+    Properties prop = new Properties();
     
     public DBConnection(){
-        
+        ClassLoader loader= Thread.currentThread().getContextClassLoader();
+        InputStream stream= loader.getResourceAsStream("com/bootstrapserver/properties/database.properties");
+        try {
+            prop.load(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public Connection getConnection(){
-        
+        Connection conn = null;        
+        try {
+            Class.forName(prop.getProperty("db.driver"));
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } try {
+            conn = DriverManager.getConnection(prop.getProperty("db.url"), prop.getProperty("db.username"), prop.getProperty("db.password"));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return conn;
     }
-    
     
 }
